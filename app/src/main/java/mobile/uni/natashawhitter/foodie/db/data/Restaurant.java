@@ -4,6 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.OffsetTime;
+
 import java.util.Date;
 
 import mobile.uni.natashawhitter.foodie.utils.enums.Location;
@@ -31,12 +36,12 @@ public final class Restaurant extends Base
 	private int numSpaces;
 	@ColumnInfo(name = RESTAURANT_OPENING_HOURS)
 	@NonNull
-	private long openingHours;
+	private OffsetTime openingHours;
 	@ColumnInfo(name = RESTAURANT_CLOSING_HOURS)
 	@NonNull
-	private long closingHours;
+	private OffsetTime closingHours;
 	
-	public Restaurant(@NonNull int id, @NonNull Date lastModified, @NonNull Date createdAt, @NonNull String title, @NonNull Location location, @NonNull Cuisine type, @NonNull String postCode, @NonNull int numSpaces, @NonNull long openingHours, @NonNull long closingHours)
+	public Restaurant(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull Location location, @NonNull Cuisine type, @NonNull String postCode, @NonNull int numSpaces, @NonNull OffsetTime openingHours, @NonNull OffsetTime closingHours)
 	{
 		super(id, lastModified, createdAt);
 		this.title = title;
@@ -104,23 +109,23 @@ public final class Restaurant extends Base
 	}
 	
 	@NonNull
-	public long getOpeningHours()
+	public OffsetTime getOpeningHours()
 	{
 		return openingHours;
 	}
 	
-	public void setOpeningHours(@NonNull long openingHours)
+	public void setOpeningHours(@NonNull OffsetTime openingHours)
 	{
 		this.openingHours = openingHours;
 	}
 	
 	@NonNull
-	public long getClosingHours()
+	public OffsetTime getClosingHours()
 	{
 		return closingHours;
 	}
 	
-	public void setClosingHours(@NonNull long closingHours)
+	public void setClosingHours(@NonNull OffsetTime closingHours)
 	{
 		this.closingHours = closingHours;
 	}

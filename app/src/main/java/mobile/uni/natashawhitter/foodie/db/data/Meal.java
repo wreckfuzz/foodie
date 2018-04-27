@@ -5,6 +5,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.support.annotation.NonNull;
 
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+
 import java.util.Date;
 
 import static mobile.uni.natashawhitter.foodie.utils.Utils.*;
@@ -32,7 +36,7 @@ public final class Meal extends Base
 	@NonNull
 	private int menuId;
 	
-	public Meal(@NonNull int id, @NonNull Date lastModified, @NonNull Date createdAt, @NonNull String title, @NonNull String desc, @NonNull double price, @NonNull String imageUrl, @NonNull int menuId)
+	public Meal(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull String desc, @NonNull double price, @NonNull String imageUrl, @NonNull int menuId)
 	{
 		super(id, lastModified, createdAt);
 		this.title = title;

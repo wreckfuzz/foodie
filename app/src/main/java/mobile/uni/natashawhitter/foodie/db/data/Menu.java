@@ -5,6 +5,11 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.support.annotation.NonNull;
 
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.OffsetTime;
+
 import java.util.Date;
 
 import mobile.uni.natashawhitter.foodie.utils.enums.MenuCategory;
@@ -30,12 +35,12 @@ public final class Menu extends Base
 	private int restaurantId;
 	@ColumnInfo(name = MENU_AVAILABILITY_FROM)
 	@NonNull
-	private long availableFrom;
+	private OffsetTime availableFrom;
 	@ColumnInfo(name = MENU_AVAILABILITY_TILL)
 	@NonNull
-	private long availableTill;
+	private OffsetTime availableTill;
 	
-	public Menu(@NonNull int id, @NonNull Date lastModified, @NonNull Date createdAt, @NonNull String title, @NonNull MenuCategory category, @NonNull int restaurantId, @NonNull long availableFrom, @NonNull long availableTill)
+	public Menu(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull MenuCategory category, @NonNull int restaurantId, @NonNull OffsetTime availableFrom, @NonNull OffsetTime availableTill)
 	{
 		super(id, lastModified, createdAt);
 		this.title = title;
@@ -79,23 +84,23 @@ public final class Menu extends Base
 	}
 	
 	@NonNull
-	public long getAvailableFrom()
+	public OffsetTime getAvailableFrom()
 	{
 		return availableFrom;
 	}
 	
-	public void setAvailableFrom(@NonNull long availableFrom)
+	public void setAvailableFrom(@NonNull OffsetTime availableFrom)
 	{
 		this.availableFrom = availableFrom;
 	}
 	
 	@NonNull
-	public long getAvailableTill()
+	public OffsetTime getAvailableTill()
 	{
 		return availableTill;
 	}
 	
-	public void setAvailableTill(@NonNull long availableTill)
+	public void setAvailableTill(@NonNull OffsetTime availableTill)
 	{
 		this.availableTill = availableTill;
 	}

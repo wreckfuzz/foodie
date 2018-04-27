@@ -5,6 +5,11 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.support.annotation.NonNull;
 
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.Date;
 
 import mobile.uni.natashawhitter.foodie.utils.Utils;
@@ -35,11 +40,11 @@ public final class Booking extends Base
 	private int numSpacesBooked;
 	@ColumnInfo(name = BOOKING_DATE_TIME)
 	@NonNull
-	private Date dateTime;
+	private ZonedDateTime dateTime;
 	@ColumnInfo(name = BOOKING_COMMENTS)
 	private String comments;
 	
-	public Booking(@NonNull int id, @NonNull Date lastModified, @NonNull Date createdAt, int userId, int restaurantId, int numSpacesBooked, Date dateTime, String comments)
+	public Booking(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, int userId, int restaurantId, int numSpacesBooked, ZonedDateTime dateTime, String comments)
 	{
 		super(id, lastModified, createdAt);
 		this.userId = userId;
@@ -79,12 +84,12 @@ public final class Booking extends Base
 		this.numSpacesBooked = numSpacesBooked;
 	}
 	
-	public Date getDateTime()
+	public ZonedDateTime getDateTime()
 	{
 		return dateTime;
 	}
 	
-	public void setDateTime(Date dateTime)
+	public void setDateTime(ZonedDateTime dateTime)
 	{
 		this.dateTime = dateTime;
 	}

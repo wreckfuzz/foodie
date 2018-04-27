@@ -4,6 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,16 +23,22 @@ public abstract class Base
 	private int id;
 	@ColumnInfo(name = BASE_LAST_MODIFIED_NAME)
 	@NonNull
-	private Date lastModified;
+	private Instant lastModified;
 	@ColumnInfo(name = BASE_CREATED_AT_NAME)
 	@NonNull
-	private Date createdAt;
+	private Instant createdAt;
 	
-	public Base(@NonNull int id, @NonNull Date lastModified, @NonNull Date createdAt)
+	public Base(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt)
 	{
 		this.id = id;
 		this.lastModified = lastModified;
 		this.createdAt = createdAt;
+	}
+	
+	public Base()
+	{
+		this.setLastModified();
+		this.setCreatedAt();
 	}
 	
 	public int getId()
@@ -42,34 +52,34 @@ public abstract class Base
 	}
 	
 	@NonNull
-	public Date getLastModified()
+	public Instant getLastModified()
 	{
 		return lastModified;
 	}
 	
-	public void setLastModified(@NonNull Date lastModified)
+	public void setLastModified(@NonNull Instant lastModified)
 	{
 		this.lastModified = lastModified;
 	}
 	
 	public void setLastModified()
 	{
-		this.lastModified = new Date();
+		this.lastModified = Instant.now();
 	}
 	
 	@NonNull
-	public Date getCreatedAt()
+	public Instant getCreatedAt()
 	{
 		return createdAt;
 	}
 	
-	public void setCreatedAt(@NonNull Date createdAt)
+	public void setCreatedAt(@NonNull Instant createdAt)
 	{
 		this.createdAt = createdAt;
 	}
 	
 	public void setCreatedAt()
 	{
-		this.createdAt = new Date();
+		this.createdAt = Instant.now();
 	}
 }

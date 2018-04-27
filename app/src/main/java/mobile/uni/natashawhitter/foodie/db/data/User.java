@@ -4,6 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.OffsetDateTime;
+
 import java.util.Date;
 
 import mobile.uni.natashawhitter.foodie.utils.enums.Cuisine;
@@ -43,7 +47,7 @@ public final class User extends Base
 	@ColumnInfo(name = USER_FAV_CUISINE)
 	private Cuisine favCuisine;
 	
-	public User(@NonNull int id, @NonNull Date lastModified, @NonNull Date createdAt, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String secretQuestion, @NonNull String secretAnswer, @NonNull Date birthDate, @NonNull String areaCode, @NonNull String mobileNum, @NonNull Cuisine favCuisine)
+	public User(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String secretQuestion, @NonNull String secretAnswer, @NonNull Date birthDate, @NonNull String areaCode, @NonNull String mobileNum, @NonNull Cuisine favCuisine)
 	{
 		super(id, lastModified, createdAt);
 		this.firstName = firstName;
