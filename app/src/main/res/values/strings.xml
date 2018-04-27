@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Foodie</string>
+
+    <string name="hint_email_address">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+
+    <string name="text_login">Login</string>
+    <string name="text_sign_up">Sign Up</string>
+    <string name="text_forgot_your_password">Forgot your password?</string>
+    <string name="text_not_member">No account? Sign up now</string>
+    <string name="text_already_member">Already a member? Login</string>
+
+    <string name="error_message_name">Enter Full Name</string>
+    <string name="error_message_email">Enter Valid Email</string>
+    <string name="error_message_age">Enter Age</string>
+    <string name="error_age_too_young">You Must Be 16+ To Register</string>
+    <string name="error_message_password">Enter Password</string>
+    <string name="error_email_exists">Email Already Exists</string>
+    <string name="error_password_match">Password Does Not Matches</string>
+    <string name="error_valid_email_password">Wrong Email or Password</string>
+
+    <string name="terms_privacy_message">By creating an account you agree to our Terms of Service and Privacy Policy</string>
+    <string name="text_back"><![CDATA[<< Back]]></string>
+
+    <string name="welcome_message">Welcome To Foodie</string>
+    <string name="welcome_description">Firstly, tell me about yourself…</string>
+
+    <string-array name="favorite_food_array">
+        <item>Select Favorite Food</item>
+        <item>Asian</item>
+        <item>American</item>
+        <item>British</item>
+        <item>Chinese</item>
+        <item>European</item>
+        <item>French</item>
+        <item>Japanese</item>
+        <item>Italian</item>
+        <item>Indian</item>
+        <item>Korean</item>
+        <item>Peruvian</item>
+        <item>Steak</item>
+        <item>No Favorite</item>
+    </string-array>
+</resources>
