@@ -6,9 +6,6 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-
 public abstract class BaseActivity extends AppCompatActivity
 {
 	@Override
@@ -17,10 +14,10 @@ public abstract class BaseActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState, persistentState);
 	}
 	
-	public boolean isGooglePlayServicesAvailable(Context context)
-	{
-		GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-		int resultCode = apiAvailability.isGooglePlayServicesAvailable(context);
-		return resultCode == ConnectionResult.SUCCESS;
-	}
+//	public boolean isGooglePlayServicesAvailable(Context context)
+//	{
+//		GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+//		int resultCode = apiAvailability.isGooglePlayServicesAvailable(context);
+//		return resultCode == ConnectionResult.SUCCESS;
+//	}
 }

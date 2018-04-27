@@ -1,21 +1,19 @@
 package mobile.uni.natashawhitter.foodie.activities;
 
 import android.app.ProgressDialog;
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.commonsware.cwac.saferoom.SafeHelperFactory;
 
 import mobile.uni.natashawhitter.foodie.R;
+import mobile.uni.natashawhitter.foodie.db.FoodieDatabase;
+import mobile.uni.natashawhitter.foodie.utils.Utils;
 
 public final class SignUpActivity extends BaseActivity
 {
@@ -26,20 +24,6 @@ public final class SignUpActivity extends BaseActivity
 	private TextView backTv;
 	
 	private ProgressDialog dialog;
-	private FirebaseAuth mAuth;
-	
-	@Override
-	public void onStart()
-	{
-		super.onStart();
-		// Check if user is signed in (non-null) and update UI accordingly.
-		if (mAuth == null)
-		{
-			mAuth = FirebaseAuth.getInstance();
-		}
-		FirebaseUser currentUser = mAuth.getCurrentUser();
-		//updateUI(currentUser);
-	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +31,7 @@ public final class SignUpActivity extends BaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
 		
-		mAuth = FirebaseAuth.getInstance();
+		//mAuth = FirebaseAuth.getInstance();
 		
 		emailTil = findViewById(R.id.activity_registration_email);
 		passwordTil = findViewById(R.id.activity_registration_password);
@@ -85,24 +69,10 @@ public final class SignUpActivity extends BaseActivity
 		final String email = emailTil.getEditText().getText().toString();
 		final String password = passwordTil.getEditText().getText().toString();
 		
-		mAuth.createUserWithEmailAndPassword(email, password)
-				.addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
-				{
-					@Override
-					public void onComplete(@NonNull Task<AuthResult> task)
-					{
-						dialog.dismiss();
-						if (task.isSuccessful())
-						{
-							// Sign up success
-							Toast.makeText(SignUpActivity.this, "Account Successfully Created", Toast.LENGTH_LONG).show();
-							finish();
-						} else
-						{
-							// If sign in fails, display a message
-							Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-						}
-					}
-				});
+		SafeHelperFactory factoryEmail = SafeHelperFactory.fromUser(emailTil.getEditText().getText());
+		SafeHelperFactory factoryPassword = SafeHelperFactory.fromUser(passwordTil.getEditText().getText());
+		FoodieDatabase db = Room.databaseBuilder(SignUpActivity.this, FoodieDatabase.class, Utils.DB_NAME).allowMainThreadQueries().build();
+		
+		db.getUserDao();
 	}
 }

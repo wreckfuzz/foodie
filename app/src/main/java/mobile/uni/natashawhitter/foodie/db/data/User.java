@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZonedDateTime;
 
 import java.util.Date;
 
@@ -37,7 +38,7 @@ public final class User extends Base
 	private String secretAnswer;
 	@ColumnInfo(name = USER_BIRTH_DATE)
 	@NonNull
-	private Date birthDate;
+	private ZonedDateTime birthDate;
 	@ColumnInfo(name = USER_AREA_CODE)
 	@NonNull
 	private String areaCode;
@@ -47,7 +48,7 @@ public final class User extends Base
 	@ColumnInfo(name = USER_FAV_CUISINE)
 	private Cuisine favCuisine;
 	
-	public User(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String secretQuestion, @NonNull String secretAnswer, @NonNull Date birthDate, @NonNull String areaCode, @NonNull String mobileNum, @NonNull Cuisine favCuisine)
+	public User(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String secretQuestion, @NonNull String secretAnswer, @NonNull ZonedDateTime birthDate, @NonNull String areaCode, @NonNull String mobileNum, @NonNull Cuisine favCuisine)
 	{
 		super(id, lastModified, createdAt);
 		this.firstName = firstName;
@@ -129,12 +130,12 @@ public final class User extends Base
 	}
 	
 	@NonNull
-	public Date getBirthDate()
+	public ZonedDateTime getBirthDate()
 	{
 		return birthDate;
 	}
 	
-	public void setBirthDate(@NonNull Date birthDate)
+	public void setBirthDate(@NonNull Date ZonedDateTime)
 	{
 		this.birthDate = birthDate;
 	}

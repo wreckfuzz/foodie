@@ -11,7 +11,9 @@ import mobile.uni.natashawhitter.foodie.db.converter.DateConverter;
 import mobile.uni.natashawhitter.foodie.db.converter.InstantConverter;
 import mobile.uni.natashawhitter.foodie.db.converter.LocationConverter;
 import mobile.uni.natashawhitter.foodie.db.converter.MenuCategoryConverter;
+import mobile.uni.natashawhitter.foodie.db.converter.OffsetTimeConverter;
 import mobile.uni.natashawhitter.foodie.db.converter.RestaurantCategoryConverter;
+import mobile.uni.natashawhitter.foodie.db.converter.ZonedDateTimeConverter;
 import mobile.uni.natashawhitter.foodie.db.dao.RestaurantDao;
 import mobile.uni.natashawhitter.foodie.db.dao.UserDao;
 import mobile.uni.natashawhitter.foodie.db.dao.UserRestaurantJoinDao;
@@ -29,7 +31,7 @@ import static mobile.uni.natashawhitter.foodie.utils.Utils.DB_NAME;
 @Database(entities = { Meal.class, Menu.class, Restaurant.class, Booking.class, RestaurantCategory.class,
 		User.class, UserRestaurantJoin.class, BookingMeals.class}, version = 1)
 @TypeConverters({ DateConverter.class, LocationConverter.class, RestaurantCategoryConverter.class,
-		MenuCategoryConverter.class, CuisineConverter.class, InstantConverter.class})
+		MenuCategoryConverter.class, CuisineConverter.class, InstantConverter.class, ZonedDateTimeConverter.class, OffsetTimeConverter.class})
 public abstract class FoodieDatabase extends RoomDatabase
 {
 		private static volatile FoodieDatabase INSTANCE;

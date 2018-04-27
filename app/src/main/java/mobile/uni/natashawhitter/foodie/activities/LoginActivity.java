@@ -2,6 +2,7 @@ package mobile.uni.natashawhitter.foodie.activities;
 
 import android.app.ProgressDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,15 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.commonsware.cwac.saferoom.SafeHelperFactory;
 
 import mobile.uni.natashawhitter.foodie.R;
 import mobile.uni.natashawhitter.foodie.db.FoodieDatabase;
@@ -35,7 +28,6 @@ public final class LoginActivity extends BaseActivity
 	private TextView signUpTv;
 	
 	private ProgressDialog dialog;
-	private FirebaseAuth mAuth;
 	
 	// Session Manager Class
 	SessionManager session;
@@ -113,6 +105,11 @@ public final class LoginActivity extends BaseActivity
 		dialog.show();
 		final String email = emailTil.getEditText().getText().toString();
 		final String password = passwordTil.getEditText().getText().toString();
+		
+//		SafeHelperFactory factory = SafeHelperFactory.fromUser(emailTil.getEditText().getText());
+//		FoodieDatabase db = Room.databaseBuilder(LoginActivity.this, FoodieDatabase.class, Utils.DB_NAME)
+//				.openHelperFactory(factory)
+//				.build();
 		
 		if (FoodieDatabase.getInstance(LoginActivity.this).getUserDao().checkUserExists(email, password))
 		{

@@ -9,6 +9,7 @@ import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.OffsetTime;
+import org.threeten.bp.ZonedDateTime;
 
 import java.util.Date;
 
@@ -35,12 +36,12 @@ public final class Menu extends Base
 	private int restaurantId;
 	@ColumnInfo(name = MENU_AVAILABILITY_FROM)
 	@NonNull
-	private OffsetTime availableFrom;
+	private ZonedDateTime availableFrom;
 	@ColumnInfo(name = MENU_AVAILABILITY_TILL)
 	@NonNull
-	private OffsetTime availableTill;
+	private ZonedDateTime availableTill;
 	
-	public Menu(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull MenuCategory category, @NonNull int restaurantId, @NonNull OffsetTime availableFrom, @NonNull OffsetTime availableTill)
+	public Menu(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull MenuCategory category, @NonNull int restaurantId, @NonNull ZonedDateTime availableFrom, @NonNull ZonedDateTime availableTill)
 	{
 		super(id, lastModified, createdAt);
 		this.title = title;
@@ -84,23 +85,23 @@ public final class Menu extends Base
 	}
 	
 	@NonNull
-	public OffsetTime getAvailableFrom()
+	public ZonedDateTime getAvailableFrom()
 	{
 		return availableFrom;
 	}
 	
-	public void setAvailableFrom(@NonNull OffsetTime availableFrom)
+	public void setAvailableFrom(@NonNull ZonedDateTime availableFrom)
 	{
 		this.availableFrom = availableFrom;
 	}
 	
 	@NonNull
-	public OffsetTime getAvailableTill()
+	public ZonedDateTime getAvailableTill()
 	{
 		return availableTill;
 	}
 	
-	public void setAvailableTill(@NonNull OffsetTime availableTill)
+	public void setAvailableTill(@NonNull ZonedDateTime availableTill)
 	{
 		this.availableTill = availableTill;
 	}

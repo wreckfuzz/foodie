@@ -19,7 +19,7 @@ import static mobile.uni.natashawhitter.foodie.utils.Utils.BASE_ID_NAME;
 public abstract class Base
 {
 	@PrimaryKey(autoGenerate = true)
-	@ColumnInfo(name = BASE_ID_NAME, index = true, typeAffinity = INTEGER)
+	@ColumnInfo(name = BASE_ID_NAME, index = true)
 	private int id;
 	@ColumnInfo(name = BASE_LAST_MODIFIED_NAME)
 	@NonNull
