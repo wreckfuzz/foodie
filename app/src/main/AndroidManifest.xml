@@ -30,5 +30,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.OnboardingActivity" />
+        <activity android:name=".activities.HomeActivity" />
     </application>
 </manifest>

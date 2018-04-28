@@ -26,6 +26,10 @@
     <string name="welcome_message">Welcome To Foodie</string>
     <string name="welcome_description">Firstly, tell me about yourself…</string>
 
+    <string-array name="navigation_drawer_items_array">
+        <item>Connect</item>
+    </string-array>
+
     <string-array name="favorite_food_array">
         <item>Select Favorite Food</item>
         <item>Asian</item>

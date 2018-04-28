@@ -5,13 +5,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import org.threeten.bp.Instant;
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.OffsetDateTime;
 
-import java.util.Date;
-import java.util.UUID;
-
-import static java.sql.Types.INTEGER;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.BASE_CREATED_AT_NAME;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.BASE_LAST_MODIFIED_NAME;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.BASE_ID_NAME;
@@ -20,7 +14,7 @@ public abstract class Base
 {
 	@PrimaryKey(autoGenerate = true)
 	@ColumnInfo(name = BASE_ID_NAME, index = true)
-	private int id;
+	private long id;
 	@ColumnInfo(name = BASE_LAST_MODIFIED_NAME)
 	@NonNull
 	private Instant lastModified;
@@ -28,7 +22,7 @@ public abstract class Base
 	@NonNull
 	private Instant createdAt;
 	
-	public Base(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt)
+	public Base(@NonNull long id, @NonNull Instant lastModified, @NonNull Instant createdAt)
 	{
 		this.id = id;
 		this.lastModified = lastModified;
@@ -41,12 +35,12 @@ public abstract class Base
 		this.setCreatedAt();
 	}
 	
-	public int getId()
+	public long getId()
 	{
 		return id;
 	}
 	
-	public void setId(int id)
+	public void setId(long id)
 	{
 		this.id = id;
 	}

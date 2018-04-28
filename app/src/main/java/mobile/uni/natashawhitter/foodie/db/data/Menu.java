@@ -41,7 +41,7 @@ public final class Menu extends Base
 	@NonNull
 	private ZonedDateTime availableTill;
 	
-	public Menu(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull MenuCategory category, @NonNull int restaurantId, @NonNull ZonedDateTime availableFrom, @NonNull ZonedDateTime availableTill)
+	public Menu(@NonNull long id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull MenuCategory category, @NonNull int restaurantId, @NonNull ZonedDateTime availableFrom, @NonNull ZonedDateTime availableTill)
 	{
 		super(id, lastModified, createdAt);
 		this.title = title;

@@ -15,10 +15,12 @@ import static mobile.uni.natashawhitter.foodie.utils.Utils.BOOKING_MEAL_TABLE;
 		foreignKeys = {
 				@ForeignKey(entity = Booking.class,
 						parentColumns = BASE_ID_NAME,
-						childColumns = BOOKING_MEAL_BOOKING_ID),
+						childColumns = BOOKING_MEAL_BOOKING_ID,
+						onDelete = ForeignKey.CASCADE),
 				@ForeignKey(entity = Meal.class,
 				parentColumns = BASE_ID_NAME,
-				childColumns = BOOKING_MEAL_MEAL_ID)
+				childColumns = BOOKING_MEAL_MEAL_ID,
+						onDelete = ForeignKey.CASCADE)
 		}
 )
 public final class BookingMeals

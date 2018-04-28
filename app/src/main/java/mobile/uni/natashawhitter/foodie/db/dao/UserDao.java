@@ -24,11 +24,15 @@ public interface UserDao
 	
 	// Get user's details by id
 	@Query("SELECT * FROM tb_users WHERE " + BASE_ID_NAME + " = :id ORDER BY first_name, last_name")
-	public User getUser(final int id);
+	public User getUser(final long id);
 	
 	// Get user's details by username/email and password
 	@Query("SELECT EXISTS (SELECT 1 FROM tb_users WHERE email_address LIKE :email AND password LIKE :password)")
 	public boolean checkUserExists(final String email, final String password);
+	
+	// Get user's details by username/email and password
+	@Query("SELECT _id FROM tb_users WHERE email_address LIKE :email AND password LIKE :password")
+	public long getUserIdByEmailAndPassword(final String email, final String password);
 	
 	// Find users by name
 	@Query("SELECT * FROM tb_users WHERE " + USER_FIRST_NAME + " LIKE :firstName OR " + USER_LAST_NAME + " LIKE :lastName ORDER BY first_name, last_name")
@@ -41,13 +45,13 @@ public interface UserDao
 	// Insert
 	
 	@Insert
-	void insert(User user);
+	long insert(User user);
 	
 	@Insert
-	void insert(User... users);
+	long[] insert(User... users);
 	
 	@Insert
-	void insert(List<User> users);
+	List<Long> insert(List<User> users);
 	
 	// Update
 	
@@ -58,4 +62,7 @@ public interface UserDao
 	
 	@Delete
 	void delete(User user);
+	
+	@Query("DELETE FROM " + USER_TABLE)
+	void delete();
 }

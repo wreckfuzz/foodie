@@ -44,7 +44,7 @@ public final class Booking extends Base
 	@ColumnInfo(name = BOOKING_COMMENTS)
 	private String comments;
 	
-	public Booking(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, int userId, int restaurantId, int numSpacesBooked, ZonedDateTime dateTime, String comments)
+	public Booking(@NonNull long id, @NonNull Instant lastModified, @NonNull Instant createdAt, int userId, int restaurantId, int numSpacesBooked, ZonedDateTime dateTime, String comments)
 	{
 		super(id, lastModified, createdAt);
 		this.userId = userId;

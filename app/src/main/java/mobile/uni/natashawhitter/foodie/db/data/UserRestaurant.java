@@ -12,44 +12,46 @@ import static mobile.uni.natashawhitter.foodie.utils.Utils.*;
 		foreignKeys = {
 				@ForeignKey(entity = User.class,
 						parentColumns = BASE_ID_NAME,
-						childColumns = RESTAURANT_USER_USER_ID),
+						childColumns = RESTAURANT_USER_USER_ID,
+				onDelete = ForeignKey.CASCADE),
 				@ForeignKey(entity = Restaurant.class,
 						parentColumns = BASE_ID_NAME,
-						childColumns = RESTAURANT_USER_USER_ID)
+						childColumns = RESTAURANT_USER_USER_ID,
+						onDelete = ForeignKey.CASCADE)
 		})
-public final class UserRestaurantJoin
+public final class UserRestaurant
 {
 	@ColumnInfo(name = RESTAURANT_USER_USER_ID, index = true)
 	@NonNull
-	private int userId;
+	private long userId;
 	@ColumnInfo(name = RESTAURANT_USER_RESTAURANT_ID, index = true)
 	@NonNull
-	private int restaurantId;
+	private long restaurantId;
 	
-	public UserRestaurantJoin(@NonNull final int userId, @NonNull final int restaurantId)
+	public UserRestaurant(@NonNull final long userId, @NonNull final long restaurantId)
 	{
 		this.userId = userId;
 		this.restaurantId = restaurantId;
 	}
 	
 	@NonNull
-	public int getUserId()
+	public long getUserId()
 	{
 		return userId;
 	}
 	
-	public void setUserId(@NonNull int userId)
+	public void setUserId(@NonNull long userId)
 	{
 		this.userId = userId;
 	}
 	
 	@NonNull
-	public int getRestaurantId()
+	public long getRestaurantId()
 	{
 		return restaurantId;
 	}
 	
-	public void setRestaurantId(@NonNull int restaurantId)
+	public void setRestaurantId(@NonNull long restaurantId)
 	{
 		this.restaurantId = restaurantId;
 	}

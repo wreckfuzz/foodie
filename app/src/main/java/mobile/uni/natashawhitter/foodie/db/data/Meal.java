@@ -36,7 +36,7 @@ public final class Meal extends Base
 	@NonNull
 	private int menuId;
 	
-	public Meal(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull String desc, @NonNull double price, @NonNull String imageUrl, @NonNull int menuId)
+	public Meal(@NonNull long id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull String desc, @NonNull double price, @NonNull String imageUrl, @NonNull int menuId)
 	{
 		super(id, lastModified, createdAt);
 		this.title = title;

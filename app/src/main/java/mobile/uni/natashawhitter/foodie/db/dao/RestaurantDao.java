@@ -15,6 +15,7 @@ import mobile.uni.natashawhitter.foodie.db.data.User;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.BASE_ID_NAME;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.RESTAURANT_LOCATION;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.RESTAURANT_POST_CODE;
+import static mobile.uni.natashawhitter.foodie.utils.Utils.RESTAURANT_TABLE;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.RESTAURANT_TITLE;
 import static mobile.uni.natashawhitter.foodie.utils.Utils.RESTAURANT_TYPE;
 
@@ -54,13 +55,13 @@ public interface RestaurantDao
 	// Insert
 	
 	@Insert
-	void insert(Restaurant restaurant);
+	long insert(Restaurant restaurant);
 	
 	@Insert
-	void insert(Restaurant... restaurants);
+	long[] insert(Restaurant... restaurants);
 	
 	@Insert
-	void insert(List<Restaurant> restaurants);
+	List<Long> insert(List<Restaurant> restaurants);
 	
 	// Update
 	
@@ -71,4 +72,7 @@ public interface RestaurantDao
 	
 	@Delete
 	void delete(Restaurant restaurant);
+	
+	@Query("DELETE FROM " + RESTAURANT_TABLE)
+	void delete();
 }

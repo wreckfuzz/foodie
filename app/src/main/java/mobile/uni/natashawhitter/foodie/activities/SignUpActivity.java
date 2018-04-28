@@ -69,10 +69,12 @@ public final class SignUpActivity extends BaseActivity
 		final String email = emailTil.getEditText().getText().toString();
 		final String password = passwordTil.getEditText().getText().toString();
 		
-		SafeHelperFactory factoryEmail = SafeHelperFactory.fromUser(emailTil.getEditText().getText());
-		SafeHelperFactory factoryPassword = SafeHelperFactory.fromUser(passwordTil.getEditText().getText());
-		FoodieDatabase db = Room.databaseBuilder(SignUpActivity.this, FoodieDatabase.class, Utils.DB_NAME).allowMainThreadQueries().build();
+//		SafeHelperFactory factoryEmail = SafeHelperFactory.fromUser(emailTil.getEditText().getText());
+//		SafeHelperFactory factoryPassword = SafeHelperFactory.fromUser(passwordTil.getEditText().getText());
+//		FoodieDatabase.getInstance(SignUpActivity.this);
 		
-		db.getUserDao();
+		FoodieDatabase.getInstance(SignUpActivity.this);
+		
+		//db.getUserDao();
 	}
 }

@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 
 import java.util.HashMap;
 
+import mobile.uni.natashawhitter.foodie.activities.HomeActivity;
 import mobile.uni.natashawhitter.foodie.activities.LoginActivity;
 import mobile.uni.natashawhitter.foodie.db.FoodieDatabase;
 import mobile.uni.natashawhitter.foodie.db.data.User;
@@ -41,31 +42,30 @@ public class SessionManager
 		editor = pref.edit();
 	}
 	
-	public void createLoginSession(int userId){
+	public boolean createLoginSession(long userId){
 		// Storing login value as TRUE
 		editor.putBoolean(IS_LOGIN, true);
 		
 		// Storing user ID in pref
-		editor.putInt(KEY_USER_ID, userId);
+		editor.putLong(KEY_USER_ID, userId);
 		
 		// commit changes
-		editor.commit();
+		return editor.commit();
 	}
 	
 	public User getUserDetails()
 	{
 		// user's ID
-		int userId = pref.getInt(KEY_USER_ID, 0);
-		
+		long userId = pref.getLong(KEY_USER_ID, 0);
 		// return user
 		return FoodieDatabase.getInstance(_context).getUserDao().getUser(userId);
 	}
 	
-	public void checkLogin(){
+	public void verifyLoggedIn() {
 		// Check login status
 		if(!this.isLoggedIn()){
 			// user is not logged in redirect him to Login Activity
-			Intent i = new Intent(_context, LoginActivity.class);
+			Intent i = new Intent(_context, HomeActivity.class);
 			// Closing all the Activities
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			

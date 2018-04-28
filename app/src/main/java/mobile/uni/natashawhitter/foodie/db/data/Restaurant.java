@@ -2,6 +2,7 @@ package mobile.uni.natashawhitter.foodie.db.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
 
 import org.threeten.bp.Instant;
@@ -41,9 +42,21 @@ public final class Restaurant extends Base
 	@NonNull
 	private OffsetTime closingHours;
 	
-	public Restaurant(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull Location location, @NonNull Cuisine type, @NonNull String postCode, @NonNull int numSpaces, @NonNull OffsetTime openingHours, @NonNull OffsetTime closingHours)
+	public Restaurant(@NonNull long id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String title, @NonNull Location location, @NonNull Cuisine type, @NonNull String postCode, @NonNull int numSpaces, @NonNull OffsetTime openingHours, @NonNull OffsetTime closingHours)
 	{
 		super(id, lastModified, createdAt);
+		this.title = title;
+		this.location = location;
+		this.type = type;
+		this.postCode = postCode;
+		this.numSpaces = numSpaces;
+		this.openingHours = openingHours;
+		this.closingHours = closingHours;
+	}
+	
+	@Ignore
+	public Restaurant(@NonNull String title, @NonNull Location location, @NonNull Cuisine type, @NonNull String postCode, @NonNull int numSpaces, @NonNull OffsetTime openingHours, @NonNull OffsetTime closingHours)
+	{
 		this.title = title;
 		this.location = location;
 		this.type = type;
@@ -128,5 +141,19 @@ public final class Restaurant extends Base
 	public void setClosingHours(@NonNull OffsetTime closingHours)
 	{
 		this.closingHours = closingHours;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Restaurant{" +
+				"title='" + title + '\'' +
+				", location=" + location +
+				", type=" + type +
+				", postCode='" + postCode + '\'' +
+				", numSpaces=" + numSpaces +
+				", openingHours=" + openingHours +
+				", closingHours=" + closingHours +
+				'}';
 	}
 }

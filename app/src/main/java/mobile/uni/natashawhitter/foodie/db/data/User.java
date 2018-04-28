@@ -2,6 +2,7 @@ package mobile.uni.natashawhitter.foodie.db.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
 
 import org.threeten.bp.Instant;
@@ -48,9 +49,25 @@ public final class User extends Base
 	@ColumnInfo(name = USER_FAV_CUISINE)
 	private Cuisine favCuisine;
 	
-	public User(@NonNull int id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String secretQuestion, @NonNull String secretAnswer, @NonNull ZonedDateTime birthDate, @NonNull String areaCode, @NonNull String mobileNum, @NonNull Cuisine favCuisine)
+	public User(@NonNull long id, @NonNull Instant lastModified, @NonNull Instant createdAt, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String secretQuestion, @NonNull String secretAnswer, @NonNull ZonedDateTime birthDate, @NonNull String areaCode, @NonNull String mobileNum, @NonNull Cuisine favCuisine)
 	{
 		super(id, lastModified, createdAt);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.secretQuestion = secretQuestion;
+		this.secretAnswer = secretAnswer;
+		this.birthDate = birthDate;
+		this.areaCode = areaCode;
+		this.mobileNum = mobileNum;
+		this.favCuisine = favCuisine;
+	}
+	
+	@Ignore
+	public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password, @NonNull String secretQuestion, @NonNull String secretAnswer, @NonNull ZonedDateTime birthDate, @NonNull String areaCode, @NonNull String mobileNum, Cuisine favCuisine)
+	{
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -135,7 +152,7 @@ public final class User extends Base
 		return birthDate;
 	}
 	
-	public void setBirthDate(@NonNull Date ZonedDateTime)
+	public void setBirthDate(@NonNull ZonedDateTime ZonedDateTime)
 	{
 		this.birthDate = birthDate;
 	}

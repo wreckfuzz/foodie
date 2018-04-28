@@ -10,12 +10,16 @@ import java.util.List;
 
 import mobile.uni.natashawhitter.foodie.db.data.Restaurant;
 import mobile.uni.natashawhitter.foodie.db.data.User;
-import mobile.uni.natashawhitter.foodie.db.data.UserRestaurantJoin;
+import mobile.uni.natashawhitter.foodie.db.data.UserRestaurant;
 
 @Dao
-public interface UserRestaurantJoinDao
+public interface UserRestaurantDao
 {
 	// Query
+	
+	// Get all details
+	@Query("SELECT * FROM tb_users_restaurants ORDER BY user_id")
+	public List<UserRestaurant> getUserRestaurants();
 	
 	// Get all admin users of a restaurant
 	@Query("SELECT * FROM tb_users INNER JOIN tb_users_restaurants ON user_id = tb_users_restaurants.user_id WHERE tb_users_restaurants.restaurant_id = :restaurantId")
@@ -28,33 +32,33 @@ public interface UserRestaurantJoinDao
 	// Insert
 	
 	@Insert
-	void insert(UserRestaurantJoin userRestaurantJoin);
+	void insert(UserRestaurant userRestaurant);
 	
 	@Insert
-	void insert(UserRestaurantJoin... userRestaurantJoins);
+	void insert(UserRestaurant... userRestaurant);
 	
 	@Insert
-	void insert(List<UserRestaurantJoin> userRestaurantJoins);
+	void insert(List<UserRestaurant> userRestaurantJoins);
 	
 	// Update
 	
 	@Update
-	void update(UserRestaurantJoin userRestaurantJoin);
+	void update(UserRestaurant userRestaurantJoin);
 	
 	@Update
-	void update(UserRestaurantJoin... userRestaurantJoins);
+	void update(UserRestaurant... userRestaurantJoins);
 	
 	@Update
-	void update(List<UserRestaurantJoin> userRestaurantJoins);
+	void update(List<UserRestaurant> userRestaurantJoins);
 	
 	// Delete
 	
 	@Delete
-	void delete(UserRestaurantJoin userRestaurantJoin);
+	void delete(UserRestaurant userRestaurantJoin);
 	
 	@Delete
-	void delete(UserRestaurantJoin... userRestaurantJoins);
+	void delete(UserRestaurant... userRestaurantJoins);
 	
 	@Delete
-	void delete(List<UserRestaurantJoin> userRestaurantJoins);
+	void delete(List<UserRestaurant> userRestaurantJoins);
 }

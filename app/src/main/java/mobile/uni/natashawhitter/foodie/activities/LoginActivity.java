@@ -1,18 +1,13 @@
 package mobile.uni.natashawhitter.foodie.activities;
 
 import android.app.ProgressDialog;
-import android.arch.lifecycle.ViewModelProviders;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.commonsware.cwac.saferoom.SafeHelperFactory;
 
 import mobile.uni.natashawhitter.foodie.R;
 import mobile.uni.natashawhitter.foodie.db.FoodieDatabase;
@@ -46,6 +41,7 @@ public final class LoginActivity extends BaseActivity
 		
 		// Session Manager
 		session = new SessionManager(getApplicationContext());
+		session.verifyLoggedIn();
 		
 		dialog = new ProgressDialog(this);
 		dialog.setMessage("Please Wait...");
@@ -113,11 +109,16 @@ public final class LoginActivity extends BaseActivity
 		
 		if (FoodieDatabase.getInstance(LoginActivity.this).getUserDao().checkUserExists(email, password))
 		{
+			long userId = FoodieDatabase.getInstance(LoginActivity.this).getUserDao().getUserIdByEmailAndPassword(email, password);
+			if (session.createLoginSession(userId))
+			{
+				session.verifyLoggedIn();
+				dialog.dismiss();
+			}
+			Toast.makeText(this, "Error Logging You In", Toast.LENGTH_LONG).show();
 			dialog.dismiss();
-			Toast.makeText(LoginActivity.this, "Hi", Toast.LENGTH_LONG).show();
 		}
+		Toast.makeText(this, "Email Or Password Is Incorrect", Toast.LENGTH_LONG).show();
 		dialog.dismiss();
-		
-		// session.createLoginSession();
 	}
 }

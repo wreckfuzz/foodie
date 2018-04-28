@@ -15,7 +15,8 @@ import static mobile.uni.natashawhitter.foodie.utils.Utils.RESTAURANT_CATEGORY_T
 		foreignKeys = {
 		@ForeignKey(entity = Restaurant.class,
 		parentColumns = BASE_ID_NAME,
-		childColumns = RESTAURANT_CATEGORY_RESTAURANT_ID)
+		childColumns = RESTAURANT_CATEGORY_RESTAURANT_ID,
+				onDelete = ForeignKey.CASCADE)
 		}
 )
 public final class RestaurantCategory
