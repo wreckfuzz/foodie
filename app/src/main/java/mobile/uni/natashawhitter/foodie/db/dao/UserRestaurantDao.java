@@ -23,11 +23,15 @@ public interface UserRestaurantDao
 	
 	// Get all admin users of a restaurant
 	@Query("SELECT * FROM tb_users INNER JOIN tb_users_restaurants ON user_id = tb_users_restaurants.user_id WHERE tb_users_restaurants.restaurant_id = :restaurantId")
-	public List<User> getAdminsByRestaurantId(final int restaurantId);
+	public List<User> getAdminsByRestaurantId(final long restaurantId);
 	
 	// Get all restaurants 'owned' by admin
 	@Query("SELECT * FROM tb_restaurants INNER JOIN tb_users_restaurants ON restaurant_id = tb_users_restaurants.restaurant_id WHERE tb_users_restaurants.user_id = :userId")
-	public List<Restaurant> getRestaurantsByAdminId(final int userId);
+	public List<Restaurant> getRestaurantsByAdminId(final long userId);
+	
+	// Check if user is an admin of an restaurant
+	@Query("SELECT EXISTS (SELECT 1 FROM tb_users_restaurants WHERE user_id = :userId)")
+	public boolean checkUserIsAdmin(final long userId);
 	
 	// Insert
 	

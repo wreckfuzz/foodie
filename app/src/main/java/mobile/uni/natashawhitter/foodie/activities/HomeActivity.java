@@ -15,17 +15,24 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import mobile.uni.natashawhitter.foodie.R;
 import mobile.uni.natashawhitter.foodie.db.FoodieDatabase;
 import mobile.uni.natashawhitter.foodie.db.data.Restaurant;
+import mobile.uni.natashawhitter.foodie.db.data.User;
 import mobile.uni.natashawhitter.foodie.utils.DataModel;
+import mobile.uni.natashawhitter.foodie.utils.DrawerItemAdapter;
 import mobile.uni.natashawhitter.foodie.utils.DrawerItemCustomAdapter;
+import mobile.uni.natashawhitter.foodie.utils.SessionManager;
+import mobile.uni.natashawhitter.foodie.utils.Utils;
 
 public class HomeActivity extends AppCompatActivity
 {
-	private String[] mNavigationDrawerItemTitles;
+	private SessionManager session;
+	private List<String> mNavigationDrawerItemTitles;
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	Toolbar toolbar;
@@ -37,27 +44,64 @@ public class HomeActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		session  = new SessionManager(HomeActivity.this);
 		mTitle = mDrawerTitle = getTitle();
-		mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+		mNavigationDrawerItemTitles = getNavItems();
+		mDrawerLayout = findViewById(R.id.drawer_layout);
+		mDrawerList = findViewById(R.id.left_drawer);
 		
 		setupToolbar();
 		
-		DataModel[] drawerItem = new DataModel[1];
+		ArrayList<DataModel> drawerItem1 = new ArrayList<>();
 		
-		drawerItem[0] = new DataModel(R.drawable.ic_launcher_background, "Connect");
+		for (String item : mNavigationDrawerItemTitles)
+		{
+			drawerItem1.add(new DataModel(item));
+		}
+		
+		
+		//drawerItem[0] = new DataModel("Connect");
+		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		
-		DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
-		mDrawerList.setAdapter(adapter);
+		//DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem1);
+		DrawerItemAdapter adapter1 = new DrawerItemAdapter(this, drawerItem1);
+		mDrawerList.setAdapter(adapter1);
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		mDrawerLayout = findViewById(R.id.drawer_layout);
 		mDrawerLayout.addDrawerListener(mDrawerToggle);
 		setupDrawerToggle();
-		selectItem(0);
+		selectItem(1);
+	}
+	
+	private List<String> getNavItems()
+	{
+		User user = Utils.getCurrentUser(HomeActivity.this);
+		List<String> menuList = new ArrayList<>();
+		menuList.add("");
+		// Check if the user is logged in
+		if (user != null && session.isLoggedIn())
+		{
+			// Check if the user is admin of any restaurants, if so display admin options
+			if (FoodieDatabase.getInstance(HomeActivity.this).getUserRestaurantDao().checkUserIsAdmin(user.getId()))
+			{
+				menuList.add("Manage Restaurants".toUpperCase());
+			}
+		}
+		menuList.add("Browse Restaurants");
+		menuList.add("Search");
+		if (user != null && session.isLoggedIn())
+		{
+			menuList.add("Bookings".toUpperCase());
+		}
+		menuList.add("");
+		menuList.add("Settings");
+		menuList.add("Send Feedback");
+		menuList.add("Rate Us");
+		menuList.add("About Us");
 		
+		return menuList;
 	}
 	
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -88,7 +132,7 @@ public class HomeActivity extends AppCompatActivity
 			
 			mDrawerList.setItemChecked(position, true);
 			mDrawerList.setSelection(position);
-			setTitle(mNavigationDrawerItemTitles[position]);
+			setTitle(mNavigationDrawerItemTitles.get(position));
 			mDrawerLayout.closeDrawer(mDrawerList);
 			
 		} else {
@@ -118,8 +162,9 @@ public class HomeActivity extends AppCompatActivity
 		mDrawerToggle.syncState();
 	}
 	
-	void setupToolbar(){
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
+	void setupToolbar()
+	{
+		toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 	}

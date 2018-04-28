@@ -5,7 +5,7 @@ public class DataModel
 	public String name;
 	
 	// Constructor.
-	public DataModel(int icon, String name) {
+	public DataModel(String name) {
 		
 		this.name = name;
 	}

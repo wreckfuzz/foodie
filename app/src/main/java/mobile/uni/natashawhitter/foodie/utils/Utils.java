@@ -1,6 +1,9 @@
 package mobile.uni.natashawhitter.foodie.utils;
 
+import android.content.Context;
 import android.support.design.widget.TextInputLayout;
+
+import mobile.uni.natashawhitter.foodie.db.data.User;
 
 public class Utils
 {
@@ -126,5 +129,11 @@ public class Utils
 			nameTil.setError("Incorrect Data Supplied");
 		}
 		return false;
+	}
+	
+	public static User getCurrentUser(Context context)
+	{
+		SessionManager session = new SessionManager(context);
+		return session.getUserDetails();
 	}
 }
