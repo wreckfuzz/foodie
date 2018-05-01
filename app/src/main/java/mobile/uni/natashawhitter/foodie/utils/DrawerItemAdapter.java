@@ -23,21 +23,16 @@ public class DrawerItemAdapter extends BaseAdapter
 	private static final int TYPE_SEPARATOR = 2;
 	private static final int TYPE_MAX_COUNT = TYPE_SEPARATOR + 1;
 	
-	private ArrayList mData;
+	private List<DataModel> mData;
+	private SessionManager session;
 	private LayoutInflater mInflater;
 	private TreeSet mSeparatorsSet = new TreeSet();
 	
-	public DrawerItemAdapter( final Context context, final ArrayList data)
+	public DrawerItemAdapter(final Context context, final List<DataModel> data)
 	{
 		mData = data;
+		session = new SessionManager(context);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
-	
-	public void addSeparatorItem(final String item)
-	{
-		mData.add(item);
-		mSeparatorsSet.add(mData.size() - 1);
-		notifyDataSetChanged();
 	}
 	
 	@Override
@@ -59,9 +54,7 @@ public class DrawerItemAdapter extends BaseAdapter
 	
 	@Override
 	public int getItemViewType(int position) {
-		if (position == 0) return TYPE_HEADER;
-		else if (mSeparatorsSet.contains(position)) return TYPE_SEPARATOR;
-		else return TYPE_ITEM;
+		return mData.get(position).getType();
 	}
 	
 	@Override
@@ -69,7 +62,7 @@ public class DrawerItemAdapter extends BaseAdapter
 	{
 		return position;
 	}
-	// VSTV120037891148
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
@@ -82,19 +75,23 @@ public class DrawerItemAdapter extends BaseAdapter
 			switch (type)
 			{
 				case TYPE_HEADER:
+					User user = session.getUserDetails();
+					
 					convertView = mInflater.inflate(R.layout.list_view_item_header_row, null);
 					holder.textView = convertView.findViewById(R.id.nav_header_email);
 					holder.textViewA = convertView.findViewById(R.id.nav_header_name);
+					holder.textView.setText(mData.get(position).getMenuItem());
+					holder.textViewA.setText(mData.get(position).getEmail());
 					break;
 				case TYPE_ITEM:
 					convertView = mInflater.inflate(R.layout.list_view_item_row, null);
 					holder.textView = convertView.findViewById(R.id.textViewName);
-					holder.textView.setText(((DataModel) mData.get(position)).name);
+					holder.textView.setText(((DataModel) mData.get(position)).getMenuItem());
 					break;
 				case TYPE_SEPARATOR:
 					convertView = mInflater.inflate(R.layout.list_view_item_seperator, null);
 					holder.textView = convertView.findViewById(R.id.textSeparator);
-					holder.textView.setText(mData.get(position).toString());
+					holder.textView.setText("");
 					break;
 			}
 			convertView.setTag(holder);

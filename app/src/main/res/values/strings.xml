@@ -46,4 +46,13 @@
         <item>Steak</item>
         <item>No Favorite</item>
     </string-array>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="nav_manage_restaurants">Manage</string>
+    <string name="nav_view_restaurants">Restaurants</string>
+    <string name="nav_bookings">Bookings</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_settings">Settings</string>
 </resources>

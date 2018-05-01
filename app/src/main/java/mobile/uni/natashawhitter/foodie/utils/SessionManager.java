@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import org.threeten.bp.Instant;
+
 import java.util.HashMap;
 
 import mobile.uni.natashawhitter.foodie.activities.HomeActivity;
@@ -58,7 +60,11 @@ public class SessionManager
 		// user's ID
 		long userId = pref.getLong(KEY_USER_ID, 0);
 		// return user
-		return FoodieDatabase.getInstance(_context).getUserDao().getUser(userId);
+		if (userId != 0)
+		{
+			return FoodieDatabase.getInstance(_context).getUserDao().getUser(userId);
+		}
+		return null;
 	}
 	
 	public void verifyLoggedIn() {

@@ -12,6 +12,7 @@ import mobile.uni.natashawhitter.foodie.R;
 
 public class RestaurantsFragment extends Fragment
 {
+	
 	public RestaurantsFragment()
 	{
 	}
